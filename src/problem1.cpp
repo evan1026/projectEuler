@@ -11,7 +11,7 @@ int main(){
     cin >> input;
     if(!(stringstream(input) >> maxNum)){
         cout << "Invalid number" << endl;
-        return(0);
+        return 1;
     }
 
     for (int i = 0; i < maxNum; i++){
@@ -21,4 +21,5 @@ int main(){
     }
 
     cout << sum << endl;
+    return 0;
 }
