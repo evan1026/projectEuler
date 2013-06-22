@@ -1,23 +1,11 @@
 #include <iostream>
-#include <sstream>
 using namespace std;
 
 bool isPrime(long num);
 
 int main(){
-    long maxFactor = 0,
-         maxNum    = 0;
-
-    string input;
-
-    cout << "Number: ";
-
-    cin >> input;
-
-    if (!(stringstream(input) >> maxNum)){
-        cout << "Invalid number";
-        return 1;
-    }
+    long maxFactor =            0,
+         maxNum    = 600851475143;
 
     for (long i = 1; i < maxNum; i++){
         if (maxNum % i == 0){
