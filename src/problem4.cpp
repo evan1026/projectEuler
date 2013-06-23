@@ -1,5 +1,4 @@
 #include <iostream>
-#include <sstream>
 using namespace std;
 
 bool testPalindrome(long num);
@@ -23,15 +22,13 @@ int main(){
 }
 
 bool testPalindrome(long num){
-    
-    stringstream a;
-    a << num;
-    string testString = a.str();
-    
-    string reverse = "";
-    for (int i = 0; i < testString.length(); i++){
-        reverse += testString[testString.length() - i - 1];
+    long test  = 0,
+         test1 = num;
+    while (num){
+        test += (num % 10);
+        test *= 10;
+        num /= 10;
     }
-
-    return reverse == testString;
+    test /= 10;
+    return test == test1;
 }
