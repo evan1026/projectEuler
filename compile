@@ -1,3 +1,4 @@
+## ## ## ## ## ## GitHub highlight hack
 #!/bin/bash
 g++ "src/problem$1.cpp" -o "problem$1.o"
 
