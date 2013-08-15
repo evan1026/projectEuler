@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
     $contents = str_replace("\"", "", file_get_contents("names.txt")); //make sure to run from the main directory
 

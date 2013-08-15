@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import datetime
 
 startDay = datetime.date(1901, 1, 1)

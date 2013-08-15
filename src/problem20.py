@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from math import factorial
 
 num = factorial(100)
