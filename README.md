@@ -1,9 +1,9 @@
 projectEuler
 ============
 
-My solutions to project euler problems, written in c++.
+My solutions to project euler problems.
 
-If you're using bash, compiling the code is simple, as long as you have gcc installed:
+If you're using bash and the code is in c++, compiling the code is simple, as long as you have gcc installed:
 
     $ cd projectEuler
     $ compile <project number>
