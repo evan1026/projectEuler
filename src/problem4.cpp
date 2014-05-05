@@ -7,16 +7,16 @@ int main(){
 
     long num = 0;
 
-    for (int i = 100; i < 999; i++){
-        for (int j = 100; j < 999; j++){
+    for (int i = 100; i < 999; ++i){
+        for (int j = 100; j < 999; ++j){
             long testNum = i * j;
 
             if (testPalindrome(testNum) && testNum > num) {
                 num = testNum;
             }
         }
-    } 
-    
+    }
+
     cout << num << endl;
     return 0;
 }

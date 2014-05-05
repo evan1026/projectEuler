@@ -7,14 +7,14 @@ long long move(int x, int y);
 long long lengths[21][21];
 
 int main(){
-    
-    for (int i = 0; i <= 20; i++){
-        for  (int j = 0; j <= 20; j++){
+
+    for (int i = 0; i <= 20; ++i){
+        for  (int j = 0; j <= 20; ++j){
             lengths[i][j] = -1;
         }
     }
-    
-    cout << "Number of moves: " << move(0, 0) << endl;    
+
+    cout << "Number of moves: " << move(0, 0) << endl;
 
     return 0;
 }

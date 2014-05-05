@@ -14,17 +14,17 @@ bool canSum(int num);
 int main(){
 
     int sum = 0;
-    for (int i = 1; i <= 28123; i++){
+    for (int i = 1; i <= 28123; ++i){
         if (!canSum(i)) sum += i;
     }
-    
+
     cout << sum << endl;
 
     return 0;
 }
 
 bool canSum(int num){
-    for (int i = 1; i < num; i++){
+    for (int i = 1; i < num; ++i){
         if (isAbundant(i) && isAbundant(num - i)){
             return true;
         }
@@ -36,7 +36,7 @@ bool isAbundant(int num){
     if (abundant[num] != UNASSIGNED) return abundant[num] == ABUNDANT;
 
     int sum = 1;
-    for (int i = 2; i <= num / 2; i++){
+    for (int i = 2; i <= num / 2; ++i){
         if (num % i == 0){
             sum += i;
         }

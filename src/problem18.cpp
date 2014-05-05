@@ -23,12 +23,12 @@ long long maxes[15][15];
 long long findMax(int row, int col);
 
 int main(){
-    
-    for (int i = 0; i < 15; i++){
-        for (int j = 0; j < 15; j++){
+
+    for (int i = 0; i < 15; ++i){
+        for (int j = 0; j < 15; ++j){
             maxes[i][j] = -1;
         }
-    }    
+    }
 
     cout << findMax(0, 0) << endl;
 
@@ -43,8 +43,8 @@ long long findMax(int row, int col){
     long long rightMax = findMax(row + 1, col + 1) + triangle[row][col];
 
     long long max = (downMax > rightMax) ? downMax : rightMax;
-    
+
     maxes[row][col] = max;
-    
+
     return max;
 }

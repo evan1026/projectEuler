@@ -7,10 +7,10 @@ int main(){
     int prime     = 0,
         numPrimes = 0;
 
-    for (int i = 2; numPrimes <= 10001; i++){
+    for (int i = 2; numPrimes <= 10001; ++i){
         if (isPrime(i)){
             prime = i;
-            numPrimes++;
+            ++numPrimes;
         }
     }
 
@@ -18,7 +18,7 @@ int main(){
 }
 
 bool isPrime(int num){
-    for (int i = 2; i < num / 2; i += 1){
+    for (int i = 2; i < num / 2; ++i){
         if (num % i == 0) return false;
     }
     return true;
