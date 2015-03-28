@@ -1,0 +1,47 @@
+#!/usr/bin/python3
+
+import time
+
+power = 5
+
+def doSums(n, power):
+    da_sum = 0
+    while n > 0:
+        da_sum += (n % 10) ** power
+        n = int(n / 10)
+    return da_sum
+
+def makeNines(num_digits):
+    return 10 ** num_digits - 1
+
+def numDigits(n):
+    counter = 0
+    while n > 0:
+        n = int(n / 10)
+        counter += 1
+    return counter
+
+#There is a point where even all 9's cannot handle the size of the number
+#This basically just finds the highest value that is the sum of the powers
+#Of all 9's with that number of digits
+#
+#Ex. for power = 2, returns 243, because 9^2 + 9^2 + 9^2 = 243 (3 digits in each)
+def getMaxValue():
+    num_digits = numDigits(doSums(9, power))
+    while numDigits(doSums(makeNines(num_digits), power)) > num_digits:
+        num_digits += 1
+
+    return doSums(makeNines(num_digits), power)
+
+def doProblem():
+    total = 0
+    for x in range(2, getMaxValue() + 1): #+1 to make it inclusive
+        if doSums(x, power) == x:
+            total += x
+    return total
+
+start = time.process_time()
+val = doProblem()
+end = time.process_time()
+
+print("Sum found to be",val,"in",int((end - start) * 1000),"ms.")

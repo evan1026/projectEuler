@@ -1,0 +1,85 @@
+#!/usr/bin/python3
+
+import time
+
+def isTruncatablePrime(n):
+    truncations = doTruncations(n)
+    for num in truncations:
+        if not isPrime(num): return False
+    return True
+
+def doTruncations(n):
+    truncations = [n]
+    for x in range(1, numDigits(n)):
+        truncations.append(removeFirst(x, n))
+        truncations.append(removeLast(x, n))
+    return truncations
+
+def removeFirst(numToRemove, num):
+    return remove(True, numToRemove, num)
+
+def removeLast(numToRemove, num):
+    return remove(False, numToRemove, num)
+
+def remove(isFirst, numToRemove, num):
+    if isFirst: return num % (10 ** (numDigits(num) - numToRemove))
+    return int(num / (10 ** numToRemove))
+
+def numDigits(n):
+    counter = 0
+    while n > 0:
+        n = int(n / 10)
+        counter += 1
+    return counter
+
+primeDict = {1: False, 2: True, 3: True, 4: False, 5: True} #Setting up a prime cache with a few values
+
+def isPrime(n):
+    global primeDict
+    if n in primeDict:
+        return primeDict[n]
+
+    if n == 2 or n == 3:
+        primeDict[n] = True
+        return True
+    if n < 2 or n%2 == 0:
+        primeDict[n] = False
+        return False
+    if n < 9:
+        primeDict[n] = True
+        return True
+    if n%3 == 0:
+        primeDict[n] = False
+        return False
+    
+    r = int(n**0.5)
+    f = 5
+    while f <= r:
+        if n%f == 0:
+            primeDict[n] = False
+            return False
+        if n%(f+2) == 0:
+            primeDict[n] = False
+            return False
+        f +=6
+
+    primeDict[n] = True
+    return True
+    
+def doProblem():
+    total = 0
+    x = 11 #First prime with multiple digits
+    counter = 0
+    while counter < 11: #Because we know there's only 11
+        if isTruncatablePrime(x):
+            total += x
+            counter += 1
+            print(x)
+        x += 1
+    return total
+
+start = time.process_time()
+val = doProblem()
+end = time.process_time()
+
+print("Answer found to be",val,"in",int((end - start) * 1000),"ms.")

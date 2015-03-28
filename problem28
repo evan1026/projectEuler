@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+
+import time
+
+def doProblem():
+    increment = 2
+    curr_num  = 1
+    total     = 1
+
+    while increment <= 1000:
+        for x in range(0,4):
+            curr_num += increment
+            total += curr_num
+        increment += 2
+    return total
+
+start = time.process_time()
+val = doProblem()
+end = time.process_time()
+
+print("Sum found to be",val,"in", int((end - start) * 1000),"ms.")

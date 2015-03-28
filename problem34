@@ -1,0 +1,50 @@
+#!/usr/bin/python3
+
+import time, math
+
+factorials = [0] * 10
+
+def doSums(n):
+    da_sum = 0
+    while n > 0:
+        da_sum += factorials[n % 10]
+        n = int(n / 10)
+    return da_sum
+
+def makeNines(num_digits):
+    return 10 ** num_digits - 1
+
+def numDigits(n):
+    counter = 0
+    while n > 0:
+        n = int(n / 10)
+        counter += 1
+    return counter
+
+#There is a point where even all 9's cannot handle the size of the number
+#This basically just finds the highest value that is the sum of the factorials
+#of all 9's with that number of digits
+def getMaxValue():
+    num_digits = numDigits(doSums(9))
+    while numDigits(doSums(makeNines(num_digits))) > num_digits:
+        num_digits += 1
+
+    return doSums(makeNines(num_digits))
+
+def fillFactorials():
+    for x in range(0,10):
+        factorials[x] = math.factorial(x)
+
+def doProblem():
+    fillFactorials()
+    total = 0
+    for x in range(3, getMaxValue() + 1): #+1 to make it inclusive
+        if doSums(x) == x:
+            total += x
+    return total
+
+start = time.process_time()
+val = doProblem()
+end = time.process_time()
+
+print("Sum found to be",val,"in",int((end - start) * 1000),"ms.")

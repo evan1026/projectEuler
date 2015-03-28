@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+
+import time
+
+def isPalindromic(n):
+    dec_string = str(n)
+    bin_string = "{0:b}".format(n)
+    return dec_string[::-1] == dec_string and bin_string[::-1] == bin_string
+
+def doProblem():
+    total = 0
+    for x in range(1, 1000000):
+        if isPalindromic(x):
+            total += x
+    return total
+
+start = time.process_time()
+val = doProblem()
+end = time.process_time()
+
+print("Answer found to be",val,"in",int((end - start) * 1000),"ms.")

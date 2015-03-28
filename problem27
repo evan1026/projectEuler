@@ -1,0 +1,62 @@
+#!/usr/bin/python3
+
+import time
+
+def numPrimes(a,b):
+    n = 0
+    while is_prime(n*n + a*n + b):
+        n += 1
+    return n - 1
+
+primeDict = {1: False, 2: True, 3: True, 4: False, 5: True} #Setting up a prime cache with a few values
+
+def is_prime(n):
+    global primeDict
+    if n in primeDict:
+        return primeDict[n]
+
+    if n == 2 or n == 3:
+        primeDict[n] = True
+        return True
+    if n < 2 or n%2 == 0:
+        primeDict[n] = False
+        return False
+    if n < 9:
+        primeDict[n] = True
+        return True
+    if n%3 == 0:
+        primeDict[n] = False
+        return False
+    
+    r = int(n**0.5)
+    f = 5
+    while f <= r:
+        if n%f == 0:
+            primeDict[n] = False
+            return False
+        if n%(f+2) == 0:
+            primeDict[n] = False
+            return False
+        f +=6
+
+    primeDict[n] = True
+    return True
+
+def doProblem():
+    mostPrimes  = 0
+    mostPrimesa = 0
+    mostPrimesb = 0
+    for a in range(-999, 1000):
+        for b in range(-999, 1000):
+            if not is_prime(b): continue
+            primes = numPrimes(a,b)
+            if primes > mostPrimes:
+                mostPrimes  = primes
+                mostPrimesa = a
+                mostPrimesb = b
+    return [mostPrimesa, mostPrimesb, mostPrimesa * mostPrimesb]
+
+start = time.process_time()
+vals = doProblem()
+end = time.process_time()
+print("a:",vals[0],"b:",vals[1],"a*b:",vals[2],". Found in",int((end - start) * 1000),"ms.")

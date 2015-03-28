@@ -1,0 +1,35 @@
+#!/usr/bin/python3
+
+import time
+from fractions import Fraction
+
+def works(x,y):
+    xdigits = [x//10,x%10]
+    ydigits = [y//10,y%10]
+
+    if xdigits[1] == 0 or ydigits[1] == 0: return False
+
+    if xdigits[0] == ydigits[0]:
+        return Fraction(x, y) == Fraction(xdigits[1], ydigits[1])
+    if xdigits[0] == ydigits[1]:
+        return Fraction(x, y) == Fraction(xdigits[1], ydigits[0])
+    if xdigits[1] == ydigits[0]:
+        return Fraction(x, y) == Fraction(xdigits[0], ydigits[1])
+    if xdigits[1] == ydigits[1]:
+        return Fraction(x, y) == Fraction(xdigits[0], ydigits[0])
+
+    return False
+
+def doProblem():
+    total = Fraction(1)
+    for x in range(10,100):
+        for y in range(x+1,100):
+            if works(x,y):
+                total *= Fraction(x,y)
+    return total.denominator
+
+start = time.process_time()
+val = doProblem()
+end = time.process_time()
+
+print("Value is ",val,". Found in ",int((end - start) * 1000)," ms.", sep="")

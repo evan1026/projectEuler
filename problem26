@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+
+import time
+
+def findCycle(num):
+    foundRemainders = [0] * num
+    value = 1
+    position = 0
+    while foundRemainders[value] == 0:
+        foundRemainders[value] = position
+        value *= 10
+        value %= num
+        position += 1
+    return position - foundRemainders[value]
+
+def willTerminate(denom):
+    while denom >= 5 and denom % 5 == 0:
+        denom /= 5
+    while denom >= 2 and denom % 2 == 0:
+        denom /= 2
+    return denom == 1
+
+def findLongestCycle():
+    longestCycle    = 0
+    longestCycleNum = 0
+
+    for denom in range(1, 1000):
+        if not willTerminate(denom) and denom > longestCycle:
+            cycleLength = findCycle(denom)
+            if cycleLength > longestCycle:
+                longestCycle    = cycleLength
+                longestCycleNum = denom
+    return longestCycleNum
+
+start = time.process_time()
+val = findLongestCycle()
+end = time.process_time()
+
+print("Longest cycle found for d=",val,". Found in ",int((end-start)*1000)," ms.",sep="")

@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+
+import time
+
+found_nums = []
+
+def add_num(n):
+    global found_nums
+    if not n in found_nums:
+        found_nums.append(n)
+
+def doProblem():
+    for a in range(2, 101):
+        for b in range(2, 101):
+            add_num(a ** b)
+
+start = time.process_time()
+doProblem()
+end = time.process_time()
+
+print(len(found_nums),". Found in ",int((end - start) * 1000)," ms.", sep="")

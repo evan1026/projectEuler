@@ -1,0 +1,48 @@
+#!/usr/bin/python3
+
+import time
+nums = []
+
+def pandigital(a, b):
+    digits = [False] * 10
+    digits[0] = True
+    prod = a * b
+    while a > 0:
+        if digits[a % 10]: return False
+        digits[a % 10] = True
+        a = int(a / 10)
+    while b > 0:
+        if digits[b % 10]: return False
+        digits[b % 10] = True
+        b = int(b / 10)
+    while prod > 0:
+        if digits[prod % 10]: return False
+        digits[prod % 10] = True
+        prod = int(prod / 10)
+    for digit in digits:
+        if not digit: return False
+    return True
+
+def numDigits(n):
+    total = 0
+    while n > 0:
+        n = int(n / 10)
+        total += 1
+    return total
+
+def findSum():
+    total = 0
+    for x in range(1, 10000):
+        xdigits = numDigits(x)
+        for y in range(10 ** (5 - xdigits - 1), 10 ** (5 - xdigits)):
+            prod = x*y
+            if not prod in nums and pandigital(x, y):
+                nums.append(prod)
+                total += prod
+    return total
+
+start = time.process_time()
+total = findSum()
+end = time.process_time()
+
+print("Sum is ",total,". Found in ",int((end - start) * 1000)," ms.",sep="")

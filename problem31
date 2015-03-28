@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+
+import time
+
+pence = 200
+
+coin_values = [200, 100, 50, 20, 10, 5, 2, 1]
+
+ways = [0] * (pence + 1)
+ways[0] = 1
+
+def doProblem():
+    for coin in coin_values:
+        for j in range(coin, pence + 1):
+            ways[j] += ways[j - coin]
+
+start = time.process_time()
+doProblem()
+end = time.process_time()
+
+print(ways[pence],"ways to make",pence,"pence found in",int((end - start) * 1000),"ms.")

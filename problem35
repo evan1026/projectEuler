@@ -1,0 +1,49 @@
+#!/usr/bin/python3
+
+import time
+
+def isCircularPrime(n):
+    if not allOdd(n): return False
+    num_digits = numDigits(n)
+    for i in range(0, num_digits):
+        if not isPrime(n): return False
+        n = int(10 * (n % (10 ** (num_digits - 1))) + ((n - (n % (10 ** (num_digits - 1)))) / (10 ** (num_digits - 1))))
+    return True
+
+def allOdd(n):
+    while n > 0:
+        if n % 2 == 0: return False
+        n = int(n / 10)
+    return True
+
+prime = [True] * 1000000
+
+def isPrime(n):
+    return prime[n]
+
+def doSieve():
+    for i in range(2, 1000): #1000 = sqrt(1000000)
+        if prime[i]:
+            for j in range(i**2, 1000000, i):
+                prime[j] = False
+
+def numDigits(n):
+    counter = 0
+    while n > 0:
+        n = int(n / 10)
+        counter += 1
+    return counter
+
+def doProblem():
+    total = 13 #The give us the first 13, so why not?
+    doSieve()
+    for x in range(100, 1000000):
+        if isCircularPrime(x):
+            total += 1
+    return total
+
+start = time.process_time()
+val = doProblem()
+end = time.process_time()
+
+print("Answer found to be",val,"in",int((end - start) * 1000),"ms.")
